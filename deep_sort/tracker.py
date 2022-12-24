@@ -93,11 +93,8 @@ class Tracker:
     def _match(self, detections):
 
         def gated_metric(tracks, dets, track_indices, detection_indices):
-            print(dets)
             features = np.array([dets[i].feature for i in detection_indices])
             targets = np.array([tracks[i].track_id for i in track_indices])
-            print(features)
-            print(targets)
             
             cost_matrix = self.metric.distance(features, targets)
             cost_matrix = linear_assignment.gate_cost_matrix(
